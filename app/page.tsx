@@ -9,7 +9,6 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const COLORS = ['#38bdf8','#0284c7'];
 
-// Define the expected type of decoded Google JWT
 interface GoogleUser {
   given_name: string;
   family_name?: string;
