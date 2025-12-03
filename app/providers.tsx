@@ -1,10 +1,16 @@
 'use client';
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
-const CLIENT_ID = "1019014061339-qsnjb810knu8fs8ohab39thmdain6dub.apps.googleusercontent.com";
+
 export function Providers({ children }: { children: React.ReactNode }) {
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+
+  if (!clientId) {
+    throw new Error("GOOGLE_CLIENT_ID is not set");
+  }
+
   return (
-    <GoogleOAuthProvider clientId={CLIENT_ID}>
+    <GoogleOAuthProvider clientId={clientId}>
       {children}
     </GoogleOAuthProvider>
   );
