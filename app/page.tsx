@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
-import jwtDecode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import { BookOpen, CheckCircle, AlertCircle, LogOut, Sparkles } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
