@@ -2,19 +2,30 @@
 
 import { useState, useEffect } from 'react';
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
-import {jwtDecode} from "jwt-decode";
+import jwtDecode from 'jwt-decode';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import { BookOpen, CheckCircle, AlertCircle, LogOut, Sparkles } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
 const COLORS = ['#38bdf8','#0284c7'];
 
+// Define the expected type of decoded Google JWT
+interface GoogleUser {
+  given_name: string;
+  family_name?: string;
+  email: string;
+  picture: string;
+  name?: string;
+  sub: string;
+}
+
 export default function Home() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<GoogleUser | null>(null);
   const [syllabus, setSyllabus] = useState("");
   const [covered, setCovered] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) setUser(JSON.parse(storedUser));
@@ -22,7 +33,7 @@ export default function Home() {
 
   const handleLoginSuccess = (credentialResponse: any) => {
     if (!credentialResponse.credential) return;
-    const decoded = jwtDecode(credentialResponse.credential);
+    const decoded: GoogleUser = jwtDecode(credentialResponse.credential);
     setUser(decoded);
     localStorage.setItem("user", JSON.stringify(decoded));
     toast.success(`Welcome ${decoded.given_name}!`);
