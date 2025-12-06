@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google"; 
+import { Roboto } from "next/font/google"; 
 import "./globals.css";
 import { Providers } from "./providers";
 
-const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700"] });
+const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
   title: "Study Gap AI",
@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={nunito.className}>
+      <body className={roboto.className}>
         <Providers>{children}</Providers>
       </body>
     </html>
